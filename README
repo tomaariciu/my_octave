@@ -1,30 +1,87 @@
-Jur ca stiu sa rezolv
+// Copyright Toma Ariciu 312CAb 2023-2024
 
-Chiar scriu in el
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
-Calul merge in padure
+Pentru a stoca matricele, am folosit un array redimensionabil de pointeri,
+dublandu-l sau injumatatindu-l ori de cate ori este necesar.
+Pointerii stocati in array sunt la structuri de tip matrix, in care sunt tinute
+numarul de linii, numarul de coloane, elementele matricei, precum si suma
+acestora. In functia main este rezolvata citirea comenzilor si apelarea
+functiilor corespunzatoare.
+
+
+1. Incarcarea in memorie a unei matrice
+Se aloca o matrice noua in care este efectuata citirea, iar apoi aceasta este
+adaugata la finalul array-ului.
+
+Complexitate: O(n * m), unde n = nr de linii, m = nr de coloane.
+
+
+2. Determinarea dimensiunilor unei matrice
+In structura matrix sunt tinute informatii despre numarul de linii si numarul
+de coloane, asa ca sunt usor de accesat si de afisat.
+
+Complexitate: O(1).
+
+
+3. Afisarea unei matrice
+Sunt afisate elementele matricei, aflate tot in structura matrix.
+
+Complexitate: O(n * m), unde n = nr de linii, m = nr de coloane.
+
+
+4. Redimensionarea unei matrice
+Citesc liniile si coloane care vor ramane dupa redimensionare, creez o matrice
+auxiliara in care tin minte elementele matricei originale, pentru ca apoi sa
+reconstruiesc matricea in-place.
+
+Complexitate: O(n * m  + l * c), unde n = nr initial de linii, m = nr initial
+de coloane, l = nr final de linii, c = nr final de coloane.
+
+
+5. Inmultirea a doua matrice
+Declar o matrice auxiliara, pentru ca algoritmul sa functioneze si cand doresc
+ca matricea rezultat sa fie una dintre matricele termen. Inmultesc cele doua
+matrice in cea auxiliara si apoi o copiez in matricea rezultat.
+
+Complexitate: O(n * m * p), unde n = nr de linii (M1), m = nr de coloane (M1)
+si nr de linii (M2), p = nr de coloane (M2), M1 si M2 fiind matricele pe care
+le inmultesc.
+
+
+6. Transpunerea unei matrice
+Construiesc o matrice auxiliara in care copiez matricea initiala. Redimensionez
+matricea initiala si o reconstruiesc folosind matricea auxiliara.
+
+Complexitate: O(n * m), unde n = nr de linii, m = nr de coloane.
+
+
+7. Ridicarea la putere in timp logaritmic
+Calculez rezultatul intr-o matrice auxiliara si mai apoi il copiez in matricea
+initiala. Folosesc algoritmul de exponentiere rapida, implementandu-l in mod
+iterativ, si functia de inmultire de matrice implementata anterior.
+
+Complexitate: O(n ^ 3 * log(p)), unde n = nr de linii = nr de coloane,
+log(p) = logaritmul in baza 2 al puterii la care este ridicata matricea.
+
+
+8. Eliberarea memoriei unei matrice
+Dealoc matricea pe care o elimin si mut matricele din dreapta ei pentru a
+acoperi golul.
+
+Complexitate: (n * m + nr_elem), unde n = nr de linii, m = nr de coloane,
+nr_elem = nr de matrice stocate in array.
+
+
+9. Eliberarea tuturor resurselor
+Dealoc toate matricele si array-ul de pointeri.
+
+Complexitate: O(nr_elem + suma(n * m)), unde nr_elem = nr de matrice stocate
+in array, suma(n * m) = suma tuturor dimensiunilor matricelor.
+
+
+10. Inmultirea matricelor folosind algoritmul lui Strassen
+Aplic algoritmul recursiv, impartind matricele in 4 blocuri cat timp
+dimensiunea acestora este diferita de 1. Calculez cele 7 matrice auxiliare cu
+ajutorul blocurilor si matricea rezultat cu ajutorul acestor matrice auxiliare.
+
+Complexitate: O(n^log(7)), unde n = nr de linii = nr de coloane al matricelor
+inmultite, log(7) = logaritmul in baza 2 al lui 7.
