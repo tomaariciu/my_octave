@@ -8,9 +8,11 @@
 
 int main(void)
 {
+	// Declararea variabilelor folosite la stocarea matricelor
 	char command;
 	int no_matrices = 0, array_size = 1, valid_command = 0;
 	struct matrix **array = malloc(array_size * sizeof(struct matrix *));
+	// Parsarea inputului si apelarea comenzii corespunzatoare
 	do {
 		scanf("%c", &command);
 		valid_command = 0;
