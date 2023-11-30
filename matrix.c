@@ -4,6 +4,7 @@
 #include "matrix.h"
 #define MOD 10007
 
+// Swap cu XOR
 void swap(int *x, int *y)
 {
 	(*x) = (*x) ^ (*y);
@@ -11,6 +12,8 @@ void swap(int *x, int *y)
 	(*x) = (*x) ^ (*y);
 }
 
+// Alocarea in memorie a unei matrice de dimensiuni n x m
+// Si initializarea acesteia cu 0
 int create_matrix(int n, int m, struct matrix *curr_matrix)
 {
 	curr_matrix->n = n;
@@ -34,6 +37,7 @@ int create_matrix(int n, int m, struct matrix *curr_matrix)
 	return 0;
 }
 
+// Citirea unei matrice
 int read_matrix(struct matrix *curr_matrix)
 {
 	int n, m;
@@ -48,6 +52,7 @@ int read_matrix(struct matrix *curr_matrix)
 	return 0;
 }
 
+// Afisarea unei matrice
 void print_matrix(struct matrix *curr_matrix)
 {
 	for (int i = 0; i < curr_matrix->n; i++) {
@@ -57,11 +62,13 @@ void print_matrix(struct matrix *curr_matrix)
 	}
 }
 
+// Afisarea dimensiunilor unei matrice
 void print_dimensions(struct matrix *curr_matrix)
 {
 	printf("%d %d\n", curr_matrix->n, curr_matrix->m);
 }
 
+// Copierea unei matrici
 void copy_matrix(struct matrix *curr_matrix, struct matrix *new_matrix)
 {
 	for (int i = 0; i < new_matrix->n; i++)
@@ -69,8 +76,10 @@ void copy_matrix(struct matrix *curr_matrix, struct matrix *new_matrix)
 			new_matrix->mat[i][j] = curr_matrix->mat[i][j];
 }
 
+// Transpunerea unei matrici
 int transpose_matrix(struct matrix *curr_matrix)
 {
+	// Alocam o matrice auxiliara
 	struct matrix *new_matrix = (struct matrix *)malloc(sizeof(struct matrix));
 	if (!new_matrix)
 		return -1;
@@ -79,6 +88,7 @@ int transpose_matrix(struct matrix *curr_matrix)
 		return -1;
 	}
 	copy_matrix(curr_matrix, new_matrix);
+	// Realocam matricea noua pentru a avea dimensiuni corespunzatoare
 	delete_matrix(curr_matrix);
 	swap(&curr_matrix->n, &curr_matrix->m);
 	if (create_matrix(curr_matrix->n, curr_matrix->m, curr_matrix) != 0) {
@@ -86,6 +96,7 @@ int transpose_matrix(struct matrix *curr_matrix)
 		free(new_matrix);
 		return -1;
 	}
+	// Construim matricea noua si dealocam matricea auxiliara
 	for (int i = 0; i < curr_matrix->n; i++)
 		for (int j = 0; j < curr_matrix->m; j++)
 			curr_matrix->mat[i][j] = new_matrix->mat[j][i];
@@ -94,9 +105,11 @@ int transpose_matrix(struct matrix *curr_matrix)
 	return 0;
 }
 
+// Redimensionarea unei matrici
 int crop_matrix(struct matrix *curr_matrix, int n, int m,
 				int *lines, int *columns)
 {
+	// Alocam o matrice auxiliara
 	struct matrix *new_matrix = (struct matrix *)malloc(sizeof(struct matrix));
 	if (!new_matrix)
 		return -1;
@@ -105,12 +118,14 @@ int crop_matrix(struct matrix *curr_matrix, int n, int m,
 		return -1;
 	}
 	copy_matrix(curr_matrix, new_matrix);
+	// Realocam matricea noua pentru a avea dimensiuni corespunzatoare
 	delete_matrix(curr_matrix);
 	if (create_matrix(n, m, curr_matrix) != 0) {
 		delete_matrix(new_matrix);
 		free(new_matrix);
 		return -1;
 	}
+	// Construim matricea noua si dealocam matricea auxiliara
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < m; j++)
 			curr_matrix->mat[i][j] = new_matrix->mat[lines[i]][columns[j]];
@@ -119,6 +134,7 @@ int crop_matrix(struct matrix *curr_matrix, int n, int m,
 	return 0;
 }
 
+// Dealocarea unei matrici
 void delete_matrix(struct matrix *curr_matrix)
 {
 	for (int i = 0; i < curr_matrix->n; i++)

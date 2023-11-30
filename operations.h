@@ -11,6 +11,6 @@ int compute_matrix(struct matrix *a[4], struct matrix *b[4],
 int strassen(struct matrix *matrix1, struct matrix *matrix2,
 			 struct matrix *result);
 int build_blocks(struct matrix *block[], int n, int dim);
+int build_aux(struct matrix *aux1, struct matrix *aux2, int dim);
 void initialize_block(struct matrix *curr_matrix, struct matrix *block,
 					  int x, int y, int dim);
-int build_aux(struct matrix *aux1, struct matrix *aux2, int dim);
